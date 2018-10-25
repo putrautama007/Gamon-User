@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.map.DetailMapActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:minHeight="?attr/actionBarSize"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:titleTextColor="@android:color/white"
+        android:background="?attr/colorPrimary">
+
+
+        <ImageView
+            android:id="@+id/back_map"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_arrow_back_24dp"/>
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:textStyle="normal"
+            android:text="@string/detail_bank_sampah"
+            android:textColor="@android:color/white"
+            style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+            android:layout_gravity="center"
+            />
+
+    </android.support.v7.widget.Toolbar>
+    <RelativeLayout
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/toolbar"
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/iv_foto_bank_sampah"
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="20dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/fotobanksampah"
+                />
+            <TextView
+                android:id="@+id/ntv_nama_bank"
+                android:layout_toRightOf="@+id/iv_foto_bank_sampah"
+                android:layout_marginTop="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:fontFamily="sans-serif"
+                android:textStyle="normal"
+                android:textColor="@color/colorPrimaryDark"
+                android:lineSpacingExtra="-1.3sp"
+                android:text="Bank Sampah Sumber Jaya"
+                />
+
+            <TextView
+                android:id="@+id/textbuka"
+                android:layout_marginTop="5dp"
+                android:layout_below="@+id/ntv_nama_bank"
+                android:layout_toRightOf="@+id/iv_foto_bank_sampah"
+                android:background="@drawable/background_green"
+                android:layout_width="50dp"
+                android:textAlignment="center"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:fontFamily="sans-serif"
+                android:textStyle="normal"
+                android:textColor="#ffffff"
+                android:lineSpacingExtra="1.3sp"
+                android:text="Buka"
+                />
+
+            <TextView
+                android:id="@+id/jam_buka"
+                android:layout_toRightOf="@id/textbuka"
+                android:layout_below="@id/ntv_nama_bank"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="5dp"
+                android:textSize="12sp"
+                android:fontFamily="sans-serif"
+                android:textStyle="normal"
+                android:textColor="@color/warm_gray_three"
+                android:lineSpacingExtra="1.3sp"
+                android:text="08.00 - 17.00"
+                />
+
+            <TextView
+                android:id="@+id/alamat_bank_sampah"
+                android:layout_below="@id/textbuka"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@+id/iv_foto_bank_sampah"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:fontFamily="sans-serif"
+                android:textStyle="normal"
+                android:textColor="@color/colorPrimaryDark"
+                android:lineSpacingExtra="1.3sp"
+                android:text="Jl. Cempaka 2 No. 16
+Malang, Jawa Timur"
+                />
+
+            <TextView
+                android:id="@+id/menerima_sampah"
+                android:layout_below="@id/iv_foto_bank_sampah"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:fontFamily="sans-serif"
+                android:textStyle="normal"
+                android:textColor="@color/colorPrimaryDark"
+                android:lineSpacingExtra="2sp"
+                android:text="Menerima Sampah :"
+                />
+
+            <ImageView
+                android:id="@+id/iv_kertas"
+                android:layout_below="@+id/menerima_sampah"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginStart="20dp"
+                android:src="@drawable/flat_paper"/>
+
+            <TextView
+                android:id="@+id/tv_kertas"
+                android:layout_toRightOf="@+id/iv_kertas"
+                android:layout_below="@id/menerima_sampah"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:fontFamily="sans-serif"
+                android:textStyle="normal"
+                android:textColor="@color/colorPrimaryDark"
+                android:lineSpacingExtra="1.3sp"
+                android:text="@string/kertas"
+                />
+
+            <TextView
+                android:id="@+id/harga_kertas"
+                android:layout_below="@id/menerima_sampah"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_alignParentEnd="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:fontFamily="sans-serif"
+                android:textStyle="normal"
+                android:textColor="@color/colorPrimaryDark"
+                android:lineSpacingExtra="2sp"
+                android:text="Rp 1500/kg"
+                />
+
+
+            <ImageView
+                android:id="@+id/iv_botol"
+                android:layout_below="@+id/iv_kertas"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="30dp"
+                android:src="@drawable/flat_bottle"/>
+
+            <TextView
+                android:id="@+id/tv_botol"
+                android:layout_below="@+id/tv_kertas"
+                android:layout_toRightOf="@+id/iv_botol"
+                android:layout_marginTop="35dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginBottom="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:fontFamily="sans-serif"
+                android:textStyle="normal"
+                android:textColor="@color/colorPrimaryDark"
+                android:lineSpacingExtra="1.3sp"
+                android:text="@string/botol"
+                />
+
+
+            <TextView
+                android:id="@+id/harga_botol"
+                android:layout_below="@id/harga_kertas"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="35dp"
+                android:layout_alignParentEnd="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:fontFamily="sans-serif"
+                android:textStyle="normal"
+                android:textColor="@color/colorPrimaryDark"
+                android:lineSpacingExtra="2sp"
+                android:text="Rp 2500/kg"
+                />
+
+            <Button
+                android:id="@+id/btn_tuju_lokasi"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_below="@+id/harga_botol"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/button_with_border"
+                android:fontFamily="sans-serif"
+                android:gravity="center"
+                android:text="@string/menuju_lokasi"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="15sp"
+                android:textStyle="normal" />
+
+            <Button
+                android:id="@+id/btn_menjadi_nasabah"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_below="@+id/btn_tuju_lokasi"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/button_with_border"
+                android:fontFamily="sans-serif"
+                android:gravity="center"
+                android:text="@string/daftar_menjadi_nasabah"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="15sp"
+                android:textStyle="normal" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+</RelativeLayout>

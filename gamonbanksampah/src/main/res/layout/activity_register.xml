@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context=".RegisterActivity">
+
+    <ImageView
+        android:id="@+id/iv_gamon_register"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="57dp"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/gamon"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_gamon_register"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:id="@+id/layout_name_register"
+        android:orientation="horizontal"
+        android:background="@drawable/layout_border"
+        android:layout_marginBottom="15dp">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_person"
+            android:layout_gravity="center_vertical"/>
+
+        <EditText
+            android:layout_marginStart="15dp"
+            android:id="@+id/et_name_register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:inputType="textPersonName"
+            android:hint="@string/nama_lengkap"
+            android:fontFamily="sans-serif"
+            android:textStyle="normal"
+            android:textColor="@color/colorPrimaryDark"
+            android:textColorHint="@color/brown_grey"
+            android:backgroundTint="@android:color/transparent"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layout_name_register"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:id="@+id/layout_email_register"
+        android:orientation="horizontal"
+        android:background="@drawable/layout_border"
+        android:layout_marginBottom="15dp">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_email"
+            android:layout_gravity="center_vertical"/>
+
+        <EditText
+            android:layout_marginStart="15dp"
+            android:id="@+id/et_email_register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:inputType="textEmailAddress"
+            android:fontFamily="sans-serif"
+            android:textStyle="normal"
+            android:hint="@string/email"
+            android:textColor="@color/colorPrimaryDark"
+            android:textColorHint="@color/brown_grey"
+            android:backgroundTint="@android:color/transparent"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layout_email_register"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:id="@+id/layout_password_register"
+        android:orientation="horizontal"
+        android:background="@drawable/layout_border"
+        android:layout_marginBottom="15dp">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_https"
+            android:layout_gravity="center_vertical"/>
+
+        <EditText
+            android:layout_marginStart="15dp"
+            android:id="@+id/et_password_register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:inputType="textPassword"
+            android:fontFamily="sans-serif"
+            android:textStyle="normal"
+            android:hint="@string/kata_sandi"
+            android:textColor="@color/colorPrimaryDark"
+            android:textColorHint="@color/brown_grey"
+            android:backgroundTint="@android:color/transparent"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layout_password_register"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:id="@+id/layout_password_confirm_register"
+        android:orientation="horizontal"
+        android:background="@drawable/layout_border"
+        android:layout_marginBottom="15dp">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_https"
+            android:layout_gravity="center_vertical"/>
+
+        <EditText
+            android:layout_marginStart="15dp"
+            android:id="@+id/et_password_confirm_register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:inputType="textPassword"
+            android:fontFamily="sans-serif"
+            android:textStyle="normal"
+            android:hint="@string/ketik_ulang_kata_sandi"
+            android:textColor="@color/colorPrimaryDark"
+            android:textColorHint="@color/brown_grey"
+            android:backgroundTint="@android:color/transparent"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layout_password_confirm_register"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:id="@+id/layout_nohp_register"
+        android:orientation="horizontal"
+        android:background="@drawable/layout_border"
+        android:layout_marginBottom="15dp">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_phone"
+            android:layout_gravity="center_vertical"/>
+
+        <EditText
+            android:layout_marginStart="15dp"
+            android:id="@+id/et_nohp_register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:inputType="phone"
+            android:fontFamily="sans-serif"
+            android:textStyle="normal"
+            android:hint="@string/no_hp"
+            android:textColor="@color/colorPrimaryDark"
+            android:textColorHint="@color/brown_grey"
+            android:backgroundTint="@android:color/transparent"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_daftar"
+        android:background="@drawable/button_gradient"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="72dp"
+        android:text="@string/daftar"
+        android:textColor="@color/colorPrimaryDark" />
+
+    <LinearLayout
+        android:id="@+id/allready_have_account"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:lineSpacingExtra="2sp"
+            android:textColor="#808080"
+            android:textSize="15sp"
+            android:textStyle="normal"
+            android:text= "Sudah punya akun ? Masuk" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:lineSpacingExtra="2sp"
+            android:textColor="@color/emerald_green"
+            android:textSize="15sp"
+            android:textStyle="normal"
+            android:text=" disini." />
+    </LinearLayout>
+</RelativeLayout>

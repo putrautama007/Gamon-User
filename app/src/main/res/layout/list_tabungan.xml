@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/rl_tabungan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/ll_debit_kredit"
+            android:weightSum="3"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:orientation="horizontal"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_debit_kredit"
+                android:layout_weight="1"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:fontFamily="sans-serif"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:lineSpacingExtra="1.3sp"
+                android:gravity="center_horizontal"
+                android:text="@string/debit"
+                />
+
+            <TextView
+                android:id="@+id/tv_tabungan_masuk"
+                android:layout_weight="1"
+                android:textAlignment="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:fontFamily="sans-serif"
+                android:textStyle="normal"
+                android:textColor="@android:color/black"
+                android:lineSpacingExtra="1.3sp"
+                android:text="Rp. 11.000,-"
+                />
+
+            <TextView
+                android:id="@+id/tv_tabungan_total"
+                android:textAlignment="center"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:fontFamily="sans-serif"
+                android:textStyle="normal"
+                android:textColor="@android:color/black"
+                android:lineSpacingExtra="1.3sp"
+                android:text="Rp. 19.000,-"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:weightSum="2"
+            android:id="@+id/ll_id_tabungan"
+            android:layout_below="@+id/ll_debit_kredit"
+            android:orientation="horizontal"
+            android:layout_marginBottom="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_transaksi_id"
+                android:layout_weight="1"
+                android:layout_marginStart="20dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:fontFamily="sans-serif"
+                android:textStyle="normal"
+                android:textColor="@color/greyish"
+                android:lineSpacingExtra="1.3sp"
+                android:text="ID : 3804785802"
+                />
+
+            <TextView
+                android:id="@+id/tv_tgl_nabung"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:textAlignment="textEnd"
+                android:layout_marginEnd="5dp"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:fontFamily="sans-serif"
+                android:textStyle="normal"
+                android:textColor="@color/greyish"
+                android:lineSpacingExtra="1.3sp"
+               android:text="02 Agustus 2018 | 14:32"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_below="@+id/ll_id_tabungan"
+            android:orientation="vertical"
+            android:background="@color/pink_grey"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"/>
+    </RelativeLayout>
+
+
+</RelativeLayout>

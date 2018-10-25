@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragment.TransaksiFragment">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:minHeight="?attr/actionBarSize"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:titleTextColor="@android:color/white"
+        android:background="?attr/colorPrimary">
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:textStyle="normal"
+            android:text="@string/transaksi"
+            android:textColor="@android:color/white"
+            style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+            android:layout_gravity="center"
+            />
+
+    </android.support.v7.widget.Toolbar>
+
+    <ScrollView
+        android:layout_below="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <android.support.v7.widget.CardView
+            android:id="@+id/cv_transaksi"
+            android:elevation="6dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:id="@+id/rl_kategori"
+                    android:background="@color/white_tree"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/tv_jenis_sampah"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginStart="20dp"
+                        android:fontFamily="sans-serif"
+                        android:textStyle="normal"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:lineSpacingExtra="2sp"
+                        android:text="@string/jenis_sampah"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_jumlah_per_kg"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="30dp"
+                        android:fontFamily="sans-serif"
+                        android:textStyle="normal"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:lineSpacingExtra="2sp"
+                        android:gravity="center_horizontal"
+                        android:text="Jumlah/kg"
+                        />
+                </RelativeLayout>
+
+
+                <ImageView
+                    android:id="@+id/iv_kertas"
+                    android:layout_below="@+id/rl_kategori"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:src="@drawable/flat_paper" />
+
+                <TextView
+                    android:id="@+id/tv_kertas_transaksi"
+                    android:layout_toRightOf="@id/iv_kertas"
+                    android:layout_below="@id/rl_kategori"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="25dp"
+                    android:layout_marginStart="10dp"
+                    android:fontFamily="sans-serif"
+                    android:textStyle="normal"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="2sp"
+                    android:text="@string/kertas"
+                    />
+
+                <RelativeLayout
+                    android:id="@+id/ll_harga_kertas"
+                    android:layout_below="@+id/rl_kategori"
+                    android:layout_alignParentEnd="true"
+                    android:background="@drawable/search_border"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_width="120dp"
+                    android:layout_height="40dp">
+                    <EditText
+                        android:layout_centerHorizontal="true"
+                        android:id="@+id/et_jumlah_kertas"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:inputType="number"
+                        android:backgroundTint="@android:color/transparent"
+                        android:textSize="15sp"/>
+                </RelativeLayout>
+
+                <ImageView
+                    android:id="@+id/iv_botol"
+                    android:layout_below="@+id/iv_kertas"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:src="@drawable/flat_bottle" />
+
+                <TextView
+                    android:id="@+id/tv_botol_transaksi"
+                    android:layout_toRightOf="@id/iv_botol"
+                    android:layout_below="@id/tv_kertas_transaksi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginStart="10dp"
+                    android:fontFamily="sans-serif"
+                    android:textStyle="normal"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:lineSpacingExtra="2sp"
+                    android:text="@string/botol"
+                    />
+
+                <RelativeLayout
+                    android:id="@+id/ll_harga_botol"
+                    android:layout_below="@+id/ll_harga_kertas"
+                    android:layout_alignParentEnd="true"
+                    android:background="@drawable/search_border"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_width="120dp"
+                    android:layout_height="40dp">
+                    <EditText
+                        android:layout_centerHorizontal="true"
+                        android:id="@+id/et_jumlah_botol"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:inputType="number"
+                        android:backgroundTint="@android:color/transparent"
+                        android:textSize="15sp"/>
+                </RelativeLayout>
+
+                <Button
+                    android:id="@+id/btn_transaksi"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginStart="70dp"
+                    android:layout_marginEnd="70dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button_with_border"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/iv_botol"
+                    android:fontFamily="sans-serif"
+                    android:textStyle="normal"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="15sp"
+                    android:gravity="center"
+                    android:text="@string/transaksi" />
+
+                <ImageView
+                    android:id="@+id/iv_qr_code"
+                    android:layout_below="@+id/btn_transaksi"
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+    </ScrollView>
+
+
+
+</RelativeLayout>

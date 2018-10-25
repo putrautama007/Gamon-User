@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:name="com.google.android.gms.maps.SupportMapFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.map.MapsActivity">
+
+   <RelativeLayout
+       android:id="@+id/ll_search_view"
+       android:layout_width="match_parent"
+       android:layout_height="50dp"
+       android:layout_marginTop="15dp"
+       android:layout_marginStart="20dp"
+       android:layout_marginEnd="20dp"
+       android:elevation="6dp"
+       android:background="@drawable/search_border_white">
+      <android.support.v7.widget.SearchView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"/>
+   </RelativeLayout>
+
+
+   <FrameLayout
+       android:id="@+id/fragment_container_map"
+       android:layout_centerHorizontal="true"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"/>
+   <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+       xmlns:tools="http://schemas.android.com/tools"
+       android:id="@+id/map"
+       android:name="com.google.android.gms.maps.SupportMapFragment"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       tools:context=".ui.map.MapsActivity" >
+
+   </fragment>
+</RelativeLayout>
