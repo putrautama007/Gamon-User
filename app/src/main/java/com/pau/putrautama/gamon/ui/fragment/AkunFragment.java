@@ -15,10 +15,17 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.pau.putrautama.gamon.R;
 import com.pau.putrautama.gamon.ui.activity.LoginActivity;
 import com.pau.putrautama.gamon.ui.detailAkun.EditAkunActivity;
 import com.pau.putrautama.gamon.ui.detailAkun.PasswordActivity;
+import com.pau.putrautama.gamon.ui.model.User;
 import com.pau.putrautama.gamon.ui.poin.PoinActivity;
 
 /**
@@ -28,16 +35,15 @@ public class AkunFragment extends Fragment {
 
      TextView mNamaLengkap,mEmail, mNoTlp, mPoin, mEdit;
      CardView mCvSandi, mCvPoin, mCvLogout;
-
-    public AkunFragment() {
-        // Required empty public constructor
-    }
+    private DatabaseReference mFirebaseDatabase;
+    private FirebaseDatabase mFirebaseInstance;
+    private FirebaseAuth mAuth;
+    private String userId;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_akun, container, false);
     }
 
@@ -53,6 +59,12 @@ public class AkunFragment extends Fragment {
         mCvSandi = view.findViewById(R.id.cv_password);
         mCvPoin = view.findViewById(R.id.cv_poin);
         mCvLogout = view.findViewById(R.id.cv_logout);
+
+        mAuth = FirebaseAuth.getInstance();
+        mFirebaseInstance = FirebaseDatabase.getInstance();
+        mFirebaseDatabase = mFirebaseInstance.getReference("users");
+
+        retriveData();
 
         mEdit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,6 +98,24 @@ public class AkunFragment extends Fragment {
         });
     }
 
+    private void retriveData(){
+        userId = mAuth.getUid();
+        mFirebaseDatabase.child(userId).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                User user = dataSnapshot.getValue(User.class);
+                mNamaLengkap.setText(user.getNamaLengkap());
+                mEmail.setText(user.getEmail());
+                mNoTlp.setText(user.getNoTlp());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
     private void customAllertDialog() {
         final Dialog dialog = new Dialog(getContext());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -101,6 +131,7 @@ public class AkunFragment extends Fragment {
         yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mAuth.signOut();
                 Intent intent = new Intent(getContext(), LoginActivity.class);
                 startActivity(intent);
                 dialog.dismiss();

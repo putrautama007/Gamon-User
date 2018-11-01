@@ -19,7 +19,10 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.pau.putrautama.gamon.R;
+import com.pau.putrautama.gamon.ui.model.User;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -28,6 +31,10 @@ public class RegisterActivity extends AppCompatActivity {
     Button mBtnDaftar;
     ProgressBar progressBar;
     private FirebaseAuth mAuth;
+    private DatabaseReference mFirebaseDatabase;
+    private FirebaseDatabase mFirebaseInstance;
+    private User user;
+    private String userId;
 
 
     @Override
@@ -45,6 +52,8 @@ public class RegisterActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.regiter_progressbar);
 
         mAuth = FirebaseAuth.getInstance();
+        mFirebaseInstance = FirebaseDatabase.getInstance();
+        mFirebaseDatabase = mFirebaseInstance.getReference("users");
 
         mBtnDaftar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,11 +67,11 @@ public class RegisterActivity extends AppCompatActivity {
         allreadyHaveAccount();
     }
     public void registerAccount(){
-        String namaLengkap = mNamaLengkap.getText().toString().trim();
-        String email = mEmail.getText().toString().trim();
-        String password  = mPassword.getText().toString().trim();
+        final String namaLengkap = mNamaLengkap.getText().toString().trim();
+        final String email = mEmail.getText().toString().trim();
+        final String password  = mPassword.getText().toString().trim();
         String confitmPassword = mConfirmPassword.getText().toString().trim();
-        String noHp = mNohp.getText().toString().trim();
+        final String noHp = mNohp.getText().toString().trim();
 
         if(TextUtils.isEmpty(email)){
             Toast.makeText(this,R.string.mohon_masukan_email,Toast.LENGTH_LONG).show();
@@ -100,6 +109,7 @@ public class RegisterActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         progressBar.setVisibility(View.GONE);
                         if (task.isSuccessful()) {
+                            createAccount(namaLengkap,email,password,noHp);
                             Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                             startActivity(intent);
                             finish();
@@ -127,5 +137,12 @@ public class RegisterActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    public void createAccount(String namaLengkap, String email, String password, String noTlp){
+        userId = mAuth.getUid();
+
+        user = new User(namaLengkap,email,password,noTlp);
+        mFirebaseDatabase.child(userId).setValue(user);
     }
 }
