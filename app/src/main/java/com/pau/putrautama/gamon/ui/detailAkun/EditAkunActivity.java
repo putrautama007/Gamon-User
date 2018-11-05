@@ -60,6 +60,7 @@ public class EditAkunActivity extends AppCompatActivity {
         mBtnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                updateUserData();
                 finish();
             }
         });
@@ -80,6 +81,17 @@ public class EditAkunActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void updateUserData(){
+        String name = mEdtNamaLengkap.getText().toString();
+        String email = mEdtEmail.getText().toString();
+        String noTlp = mEdtNoTlp.getText().toString();
+
+        userId = mAuth.getUid();
+        mFirebaseDatabase.child(userId).child("email").setValue(name);
+        mFirebaseDatabase.child(userId).child("namaLengkap").setValue(email);
+        mFirebaseDatabase.child(userId).child("noTlp").setValue(noTlp);
     }
 
 }

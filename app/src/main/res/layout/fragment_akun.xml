@@ -65,7 +65,7 @@
              android:textColor="@color/tree_green"
              android:textSize="15sp"
              android:textStyle="normal"
-             android:text="EDIT" />
+             android:text="@string/edit" />
 
          <TextView
              android:id="@+id/tv_nama_lengkap"
@@ -78,7 +78,6 @@
              android:textStyle="normal"
              android:textColor="@color/colorPrimaryDark"
              android:lineSpacingExtra="2sp"
-             android:text="John Doe"
              />
 
          <TextView
@@ -105,7 +104,6 @@
              android:textStyle="normal"
              android:textColor="@color/colorPrimaryDark"
              android:lineSpacingExtra="2sp"
-             android:text="john.doe@mail.com"
              />
          <TextView
              android:layout_marginTop="5dp"
@@ -131,7 +129,6 @@
              android:textStyle="normal"
              android:textColor="@color/colorPrimaryDark"
              android:lineSpacingExtra="2sp"
-             android:text="081234567898"
              />
       </RelativeLayout>
    </android.support.v7.widget.CardView>
@@ -207,6 +204,7 @@
              android:text="@string/poin"
              />
          <TextView
+             android:id="@+id/tv_poin_user"
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:layout_alignParentEnd="true"
@@ -216,7 +214,6 @@
              android:textStyle="bold"
              android:textColor="@color/baby_puke_green"
              android:lineSpacingExtra="2sp"
-             android:text="5.000P"
              />
       </RelativeLayout>
    </android.support.v7.widget.CardView>

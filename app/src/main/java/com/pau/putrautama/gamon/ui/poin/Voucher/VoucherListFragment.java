@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.pau.putrautama.gamon.R;
-import com.pau.putrautama.gamon.ui.adapter.HistoryAdapter;
 import com.pau.putrautama.gamon.ui.adapter.VoucherAdapter;
 import com.pau.putrautama.gamon.ui.model.VoucherList;
 

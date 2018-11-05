@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 
 import com.pau.putrautama.gamon.R;
 import com.pau.putrautama.gamon.ui.adapter.BankAdapter;
-import com.pau.putrautama.gamon.ui.adapter.HistoryAdapter;
 import com.pau.putrautama.gamon.ui.model.BankList;
 
 import java.util.ArrayList;

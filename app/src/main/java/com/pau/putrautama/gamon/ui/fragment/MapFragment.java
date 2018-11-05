@@ -2,6 +2,7 @@ package com.pau.putrautama.gamon.ui.fragment;
 
 
 import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -18,8 +20,15 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.pau.putrautama.gamon.R;
 import com.pau.putrautama.gamon.ui.map.DetailMapActivity;
+import com.pau.putrautama.gamon.ui.model.BankSampah;
 import com.pau.putrautama.gamon.ui.model.MapList;
 
 import java.util.ArrayList;
@@ -27,11 +36,16 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MapFragment extends Fragment implements OnMapReadyCallback {
+public class MapFragment extends Fragment implements OnMapReadyCallback,LocationListener, GoogleMap.OnMarkerClickListener {
 
     SupportMapFragment supportMapFragment;
     private GoogleMap mMap, bankSampahMap;
     View mView;
+    private DatabaseReference bankSampah;
+    private FirebaseDatabase firebaseDatabase;
+    private ChildEventListener mChildEventListener;
+    Marker marker;
+
 
 
     private ArrayList<MapList> mapLists = new ArrayList<>();
@@ -57,35 +71,74 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         super.onViewCreated(view, savedInstanceState);
         supportMapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         supportMapFragment.getMapAsync(this);
-//        setUpData();
+        ChildEventListener mChildEventListener;
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        bankSampah= firebaseDatabase.getReference("bankSampah");
+        bankSampah.push().setValue(marker);
     }
 
-    private void setUpData() {
-        mapLists.add(new MapList("Bank Sampah Sumber Jaya","","Jl. Cempaka 2 No. 16 Malang, Jawa Timur","08.00 - 17.00"
-                ,"-7.956604,112.631854",true,true,1500,2500));
-    }
+
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         bankSampahMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
-        LatLng location = new LatLng(-7.958965, 112.632926);
-//        mMap.addMarker(new MarkerOptions().position(location).title("Anda disini"));
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location,16.0f) );
-
-        LatLng bankSampahLocation = new LatLng(-7.956604, 112.631854);
-        bankSampahMap.addMarker(new MarkerOptions().position(bankSampahLocation).icon(BitmapDescriptorFactory.fromResource(R.mipmap.pin)));
-        bankSampahMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+        googleMap.setOnMarkerClickListener(this);
+        googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        bankSampah.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public boolean onMarkerClick(Marker marker) {
-                Intent intent = new Intent(getContext(), DetailMapActivity.class);
-//                intent.putExtra(DetailMapActivity.ITEM_MAP,mapLists);
-                startActivity(intent);
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot s: dataSnapshot.child("bankSampah").getChildren()){
+                    BankSampah bankSampah = s.getValue(BankSampah.class);
+                    LatLng location = new LatLng(bankSampah.getLatitude(),bankSampah.getLongitude());
+                    bankSampahMap.addMarker(new MarkerOptions().position(location).title(bankSampah.getNamaBankSampah())
+                            .icon(BitmapDescriptorFactory.fromResource(R.mipmap.pin)));
+                    bankSampahMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                        @Override
+                        public boolean onMarkerClick(Marker marker) {
+                            Intent intent = new Intent(getContext(), DetailMapActivity.class);
+                            startActivity(intent);
+                            return true;
+                        }
+                    });
+                }
+            }
 
-                return true;
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
             }
         });
+
+
+
+        LatLng location = new LatLng(-7.958965, 112.632926);
+////        mMap.addMarker(new MarkerOptions().position(location).title("Anda disini"));
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location,16.0f) );
+//
+//        LatLng bankSampahLocation = new LatLng(-7.956604, 112.631854);
+//        bankSampahMap.addMarker(new MarkerOptions().position(bankSampahLocation).icon(BitmapDescriptorFactory.fromResource(R.mipmap.pin)));
+//        bankSampahMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+//            @Override
+//            public boolean onMarkerClick(Marker marker) {
+//                Intent intent = new Intent(getContext(), DetailMapActivity.class);
+////                intent.putExtra(DetailMapActivity.ITEM_MAP,mapLists);
+//                startActivity(intent);
+//
+//                return true;
+//            }
+//        });
+//    }
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+
+    }
+
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+        return false;
     }
 }

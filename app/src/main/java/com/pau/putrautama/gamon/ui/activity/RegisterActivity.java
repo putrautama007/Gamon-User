@@ -72,6 +72,7 @@ public class RegisterActivity extends AppCompatActivity {
         final String password  = mPassword.getText().toString().trim();
         String confitmPassword = mConfirmPassword.getText().toString().trim();
         final String noHp = mNohp.getText().toString().trim();
+        final int poin = 0;
 
         if(TextUtils.isEmpty(email)){
             Toast.makeText(this,R.string.mohon_masukan_email,Toast.LENGTH_LONG).show();
@@ -109,7 +110,7 @@ public class RegisterActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         progressBar.setVisibility(View.GONE);
                         if (task.isSuccessful()) {
-                            createAccount(namaLengkap,email,password,noHp);
+                            createAccount(namaLengkap,email,password,noHp,poin);
                             Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                             startActivity(intent);
                             finish();
@@ -139,10 +140,10 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-    public void createAccount(String namaLengkap, String email, String password, String noTlp){
+    public void createAccount(String namaLengkap, String email, String password, String noTlp, int poin){
         userId = mAuth.getUid();
 
-        user = new User(namaLengkap,email,password,noTlp);
+        user = new User(namaLengkap,email,password,noTlp,poin);
         mFirebaseDatabase.child(userId).setValue(user);
     }
 }

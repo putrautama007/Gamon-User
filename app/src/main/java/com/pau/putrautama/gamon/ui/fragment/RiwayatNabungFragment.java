@@ -12,9 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.pau.putrautama.gamon.R;
-import com.pau.putrautama.gamon.ui.adapter.HistoryAdapter;
+import com.pau.putrautama.gamon.ui.adapter.TransaksiLangsungAdapter;
 import com.pau.putrautama.gamon.ui.model.History;
-import com.pau.putrautama.gamon.ui.model.NabungList;
 
 import java.util.ArrayList;
 
@@ -25,7 +24,7 @@ public class RiwayatNabungFragment extends Fragment {
 
     private RecyclerView mRVHistory;
     private ArrayList<History> historyList = new ArrayList<>();
-    private HistoryAdapter adapter;
+    private TransaksiLangsungAdapter adapter;
 
 
     public RiwayatNabungFragment() {
@@ -45,11 +44,11 @@ public class RiwayatNabungFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         setUpData();
-        mRVHistory = view.findViewById(R.id.rv_riwayat_nabung);
-        adapter = new HistoryAdapter(getContext(),historyList);
-        mRVHistory.setLayoutManager(new LinearLayoutManager(getContext()));
-        mRVHistory.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+//        mRVHistory = view.findViewById(R.id.rv_riwayat_nabung);
+//        adapter = new TransaksiLangsungAdapter(getContext(),historyList);
+//        mRVHistory.setLayoutManager(new LinearLayoutManager(getContext()));
+//        mRVHistory.setAdapter(adapter);
+//        adapter.notifyDataSetChanged();
     }
 
     private void setUpData(){

@@ -46,7 +46,7 @@
     <string name="plus">+</string>
     <string name="p">P</string>
     <string name="rupiah">Rp. </string>
-    <string name="kilogram">Kg</string>
+    <string name="kilogram"> Kg</string>
     <string name="title_activity_maps">Map</string>
     <string name="telepon">Telepon</string>
     <string name="scan">Scan</string>
@@ -74,5 +74,6 @@
     <string name="debit">DEBIT</string>
     <string name="confirm_password_not_match">Password yang dimasukan tidak sama</string>
     <string name="sudah_terdaftar">Email yang digunakan sudah terdaftar</string>
+    <string name="edit">EDIT</string>
 
 </resources>

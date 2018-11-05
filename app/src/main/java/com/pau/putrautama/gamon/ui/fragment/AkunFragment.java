@@ -54,7 +54,7 @@ public class AkunFragment extends Fragment {
         mNamaLengkap = view.findViewById(R.id.tv_nama_lengkap);
         mEmail = view.findViewById(R.id.tv_email_user);
         mNoTlp = view.findViewById(R.id.tv_nohp_user);
-        mPoin = view.findViewById(R.id.tv_poin);
+        mPoin = view.findViewById(R.id.tv_poin_user);
         mEdit = view.findViewById(R.id.tv_edit);
         mCvSandi = view.findViewById(R.id.cv_password);
         mCvPoin = view.findViewById(R.id.cv_poin);
@@ -107,6 +107,7 @@ public class AkunFragment extends Fragment {
                 mNamaLengkap.setText(user.getNamaLengkap());
                 mEmail.setText(user.getEmail());
                 mNoTlp.setText(user.getNoTlp());
+                mPoin.setText(String.valueOf(user.getPoin())+" P");
             }
 
             @Override
