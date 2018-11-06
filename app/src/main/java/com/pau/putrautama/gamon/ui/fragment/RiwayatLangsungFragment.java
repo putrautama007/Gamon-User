@@ -53,7 +53,7 @@ public class RiwayatLangsungFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-//        setUpData();
+
         mAuth = FirebaseAuth.getInstance();
         mFirebaseInstance = FirebaseDatabase.getInstance();
         mFirebaseDatabase = mFirebaseInstance.getReference("users");
@@ -87,8 +87,4 @@ public class RiwayatLangsungFragment extends Fragment {
         });
     }
 
-//    private void setUpData(){
-//        historyList.add(new History("Bank Sampah Sumber Jaya","Jl. Cempaka 2 No. 16 Malang, Jawa Timur","20 Oktober 2018 | 12:30"
-//                ,50,"John Doe",2,1,3000,2500,55000));
-//    }
 }

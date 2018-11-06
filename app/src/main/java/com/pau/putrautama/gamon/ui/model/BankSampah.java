@@ -10,13 +10,13 @@ public class BankSampah {
     private double longitude;
     private boolean menerimaSampahKertas;
     private boolean menerimaSampahPlastik;
-    private String hargaSampahKertas;
-    private String hargaSampahPlastik;
+    private int hargaSampahKertas;
+    private int hargaSampahPlastik;
 
     public BankSampah(String namaBankSampah, String bankSampahEmail, String bankSampahNoTlp,
                       String alamatBank, double latitude, double longitude,
                       boolean menerimaSampahKertas, boolean menerimaSampahPlastik,
-                      String hargaSampahKertas, String hargaSampahPlastik) {
+                      int hargaSampahKertas, int hargaSampahPlastik) {
         this.namaBankSampah = namaBankSampah;
         this.bankSampahEmail = bankSampahEmail;
         this.bankSampahNoTlp = bankSampahNoTlp;
@@ -96,19 +96,19 @@ public class BankSampah {
         this.menerimaSampahPlastik = menerimaSampahPlastik;
     }
 
-    public String getHargaSampahKertas() {
+    public int getHargaSampahKertas() {
         return hargaSampahKertas;
     }
 
-    public void setHargaSampahKertas(String hargaSampahKertas) {
+    public void setHargaSampahKertas(int hargaSampahKertas) {
         this.hargaSampahKertas = hargaSampahKertas;
     }
 
-    public String getHargaSampahPlastik() {
+    public int getHargaSampahPlastik() {
         return hargaSampahPlastik;
     }
 
-    public void setHargaSampahPlastik(String hargaSampahPlastik) {
+    public void setHargaSampahPlastik(int hargaSampahPlastik) {
         this.hargaSampahPlastik = hargaSampahPlastik;
     }
 }

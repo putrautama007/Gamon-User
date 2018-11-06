@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,14 +37,15 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MapFragment extends Fragment implements OnMapReadyCallback,LocationListener, GoogleMap.OnMarkerClickListener {
+public class MapFragment extends Fragment implements OnMapReadyCallback,
+        LocationListener, GoogleMap.OnMarkerClickListener {
 
     SupportMapFragment supportMapFragment;
     private GoogleMap mMap, bankSampahMap;
     View mView;
     private DatabaseReference bankSampah;
     private FirebaseDatabase firebaseDatabase;
-    private ChildEventListener mChildEventListener;
+
     Marker marker;
 
 
@@ -73,7 +75,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,Location
         supportMapFragment.getMapAsync(this);
         ChildEventListener mChildEventListener;
         firebaseDatabase = FirebaseDatabase.getInstance();
-        bankSampah= firebaseDatabase.getReference("bankSampah");
+        bankSampah= firebaseDatabase.getReference("banksampah");
         bankSampah.push().setValue(marker);
     }
 
@@ -81,7 +83,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,Location
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
+//        mMap = googleMap;
         bankSampahMap = googleMap;
 
         googleMap.setOnMarkerClickListener(this);
@@ -89,19 +91,13 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,Location
         bankSampah.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot s: dataSnapshot.child("bankSampah").getChildren()){
-                    BankSampah bankSampah = s.getValue(BankSampah.class);
-                    LatLng location = new LatLng(bankSampah.getLatitude(),bankSampah.getLongitude());
-                    bankSampahMap.addMarker(new MarkerOptions().position(location).title(bankSampah.getNamaBankSampah())
+                for (DataSnapshot snapshot: dataSnapshot.getChildren()){
+                    BankSampah bankSampah1 = snapshot.getValue(BankSampah.class);
+                    LatLng location=new LatLng(bankSampah1.getLatitude(),bankSampah1.getLongitude());
+                    bankSampahMap.addMarker(new MarkerOptions().position(location)
+                            .title(bankSampah1.getNamaBankSampah())
                             .icon(BitmapDescriptorFactory.fromResource(R.mipmap.pin)));
-                    bankSampahMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-                        @Override
-                        public boolean onMarkerClick(Marker marker) {
-                            Intent intent = new Intent(getContext(), DetailMapActivity.class);
-                            startActivity(intent);
-                            return true;
-                        }
-                    });
+
                 }
             }
 
@@ -110,26 +106,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,Location
 
             }
         });
-
-
-
-        LatLng location = new LatLng(-7.958965, 112.632926);
-////        mMap.addMarker(new MarkerOptions().position(location).title("Anda disini"));
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location,16.0f) );
-//
-//        LatLng bankSampahLocation = new LatLng(-7.956604, 112.631854);
-//        bankSampahMap.addMarker(new MarkerOptions().position(bankSampahLocation).icon(BitmapDescriptorFactory.fromResource(R.mipmap.pin)));
-//        bankSampahMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-//            @Override
-//            public boolean onMarkerClick(Marker marker) {
-//                Intent intent = new Intent(getContext(), DetailMapActivity.class);
-////                intent.putExtra(DetailMapActivity.ITEM_MAP,mapLists);
-//                startActivity(intent);
-//
-//                return true;
-//            }
-//        });
-//    }
     }
 
     @Override
