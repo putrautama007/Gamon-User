@@ -69,9 +69,6 @@ public class BerandaFragment extends Fragment {
 
 
 
-
-
-
         close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

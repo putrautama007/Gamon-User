@@ -42,6 +42,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
 
     SupportMapFragment supportMapFragment;
     private GoogleMap mMap, bankSampahMap;
+    private ChildEventListener mChildEventListener;
     View mView;
     private DatabaseReference bankSampah;
     private FirebaseDatabase firebaseDatabase;
