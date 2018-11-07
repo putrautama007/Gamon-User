@@ -40,7 +40,7 @@ public class BankAdapter extends RecyclerView.Adapter<BankAdapter.BankViewHolder
         holder.mAlamatBank.setText(bankLists.get(position).getAlamatBank());
         String saldo = Integer.toString(bankLists.get(position).getSaldo());
         holder.mSaldo.setText("Rp. "+saldo);
-        Glide.with(context).load(bankLists.get(position).getFotoBank()).into(holder.mFotoBank);
+
         holder.mCVBank.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,7 +62,7 @@ public class BankAdapter extends RecyclerView.Adapter<BankAdapter.BankViewHolder
     public class BankViewHolder extends RecyclerView.ViewHolder {
 
         private TextView mNamaBank,mAlamatBank,mSaldo;
-        private ImageView mFotoBank;
+
         private CardView mCVBank;
         public BankViewHolder(View itemView) {
             super(itemView);
@@ -70,7 +70,6 @@ public class BankAdapter extends RecyclerView.Adapter<BankAdapter.BankViewHolder
             mNamaBank = itemView.findViewById(R.id.tv_nama_bank_sampah);
             mAlamatBank = itemView.findViewById(R.id.tv_alamat_bank_sampah);
             mSaldo = itemView.findViewById(R.id.tv_saldo_user);
-            mFotoBank = itemView.findViewById(R.id.iv_bank_sampah);
             mCVBank = itemView.findViewById(R.id.cv_bank_sampah);
         }
     }

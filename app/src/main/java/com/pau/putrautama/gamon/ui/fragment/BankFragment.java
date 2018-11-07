@@ -53,14 +53,14 @@ public class BankFragment extends Fragment {
 
     private void setUpData(){
 
-        int [] fotobank = new int[]{
-                R.drawable.fotobanksampah,
-
-        };
-
-        bankLists.add(new BankList(fotobank[0],"Bank Sampah Sumber Jaya",
-                "Jl. Cempaka 2 No. 16 Malang, Jawa Timur",
-                30000, "21-Oktober-2018"));
+//        int [] fotobank = new int[]{
+//                R.drawable.fotobanksampah,
+//
+//        };
+//
+//        bankLists.add(new BankList(fotobank[0],"Bank Sampah Sumber Jaya",
+//                "Jl. Cempaka 2 No. 16 Malang, Jawa Timur",
+//                30000, "21-Oktober-2018"));
     }
 
 }
