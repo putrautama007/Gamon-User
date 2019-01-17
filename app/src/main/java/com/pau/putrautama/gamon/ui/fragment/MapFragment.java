@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,6 +49,11 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
 
     Marker marker;
 
+     double latitude,longitude;
+     String namaBank,alamatBank;
+     boolean isMenerimaKertas,isMenerimaBotol;
+     int hargaKertas,hargaPlastik;
+     String idBankSampah;
 
 
     private ArrayList<MendaftarUser> mendaftarUsers = new ArrayList<>();
@@ -63,6 +69,15 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        Bundle bundle = this.getArguments();
+
+//            String getLatitude = bundle.getString("latitude");
+//            String getLongitude = getArguments().getString("longitude");
+//            Log.d("longitude", "onCreateView: " + getLatitude);
+//        Log.d("lati", "onCreateView: " + getLongitude);
+
+
+
         mView = inflater.inflate(R.layout.fragment_map, container, false);
 
         return mView;
@@ -94,37 +109,22 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
                 for (DataSnapshot snapshot: dataSnapshot.getChildren()){
                     BankSampah bankSampah1 = snapshot.getValue(BankSampah.class);
                     LatLng location=new LatLng(bankSampah1.getLatitude(),bankSampah1.getLongitude());
-                    final double latitude = bankSampah1.getLatitude();
-                    final double longitude = bankSampah1.getLongitude();
-                    final String namaBank = bankSampah1.getNamaBankSampah();
-                    final String alamatBank = bankSampah1.getAlamatBank();
-                    final boolean isMenerimaKertas = bankSampah1.isMenerimaSampahKertas();
-                    final boolean isMenerimaBotol = bankSampah1.isMenerimaSampahPlastik();
-                    final int hargaKertas = bankSampah1.getHargaSampahKertas();
-                    final int hargaPlastik = bankSampah1.getHargaSampahPlastik();
-                    final String idBankSampah = snapshot.getKey();
+                     latitude = bankSampah1.getLatitude();
+                    longitude = bankSampah1.getLongitude();
+                    namaBank = bankSampah1.getNamaBankSampah();
+                    alamatBank = bankSampah1.getAlamatBank();
+                    isMenerimaKertas = bankSampah1.isMenerimaSampahKertas();
+                    isMenerimaBotol = bankSampah1.isMenerimaSampahPlastik();
+                    hargaKertas = bankSampah1.getHargaSampahKertas();
+                    hargaPlastik = bankSampah1.getHargaSampahPlastik();
+                    idBankSampah = snapshot.getKey();
+
+                    Log.d("bank", "onDataChange: "+namaBank);
 
 
                     bankSampahMap.addMarker(new MarkerOptions().position(location)
                             .title(bankSampah1.getNamaBankSampah())
                             .icon(BitmapDescriptorFactory.fromResource(R.mipmap.pin)));
-                    bankSampahMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-                        @Override
-                        public boolean onMarkerClick(Marker marker) {
-                            Intent intent = new Intent(getContext(), DetailMapActivity.class);
-                            intent.putExtra("latitude",String.valueOf(latitude));
-                            intent.putExtra("longitude",String.valueOf(longitude));
-                            intent.putExtra("namabank",namaBank);
-                            intent.putExtra("alamatbank",alamatBank);
-                            intent.putExtra("menerimakertas",String.valueOf(isMenerimaKertas));
-                            intent.putExtra("menerimaplastik",String.valueOf(isMenerimaBotol));
-                            intent.putExtra("hargakertas",String.valueOf(hargaKertas));
-                            intent.putExtra("hargaplastik",String.valueOf(hargaPlastik));
-                            intent.putExtra("idbankSampah",idBankSampah);
-                            startActivity(intent);
-                             return true;
-                        }
-                    });
                 }
             }
 
@@ -133,9 +133,10 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
 
             }
         });
-        LatLng location = new LatLng(-7.934054, 112.632806);
+        LatLng location = new LatLng(-8.796408, 115.176543);
         mMap.addMarker(new MarkerOptions().position(location).title("Anda disini").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location,16.0f) );
+
     }
 
     @Override
@@ -144,7 +145,19 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
     }
 
     @Override
-    public boolean onMarkerClick(Marker marker) {
-        return false;
+    public boolean onMarkerClick(Marker marker)
+    {
+        Intent intent = new Intent(getContext(), DetailMapActivity.class);
+        intent.putExtra("latitude",String.valueOf(latitude));
+        intent.putExtra("longitude",String.valueOf(longitude));
+        intent.putExtra("namabank",namaBank);
+        intent.putExtra("alamatbank",alamatBank);
+        intent.putExtra("menerimakertas",String.valueOf(isMenerimaKertas));
+        intent.putExtra("menerimaplastik",String.valueOf(isMenerimaBotol));
+        intent.putExtra("hargakertas",String.valueOf(hargaKertas));
+        intent.putExtra("hargaplastik",String.valueOf(hargaPlastik));
+        intent.putExtra("idbankSampah",idBankSampah);
+        startActivity(intent);
+        return true;
     }
 }

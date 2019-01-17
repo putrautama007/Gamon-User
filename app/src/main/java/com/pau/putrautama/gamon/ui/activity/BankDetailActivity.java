@@ -1,5 +1,6 @@
 package com.pau.putrautama.gamon.ui.activity;
 
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.pau.putrautama.gamon.R;
 import com.pau.putrautama.gamon.ui.adapter.BankAdapter;
 import com.pau.putrautama.gamon.ui.adapter.TabunganAdapter;
@@ -27,7 +29,7 @@ public class BankDetailActivity extends AppCompatActivity {
 
     private TextView namaBank,alamatBank,tglMasuk;
     private String nama_bank,alamat_bank,tgl_masuk_bank;
-    private ImageView btnBack;
+    private ImageView btnBack, detailBank;
 
 
 
@@ -44,10 +46,12 @@ public class BankDetailActivity extends AppCompatActivity {
         alamatBank = findViewById(R.id.tv_alamat_bank_sampah);
         tglMasuk = findViewById(R.id.tv_tanggal_gabung);
         btnBack = findViewById(R.id.back_detail_bank);
-
+        detailBank = findViewById(R.id.iv_foto_bank_sampah_detail);
         namaBank.setText(nama_bank);
         alamatBank.setText(alamat_bank);
         tglMasuk.setText(tgl_masuk_bank);
+
+
 
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override

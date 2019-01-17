@@ -1,6 +1,8 @@
 package com.pau.putrautama.gamon.ui.voucher;
 
 import android.app.Dialog;
+import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,17 +13,30 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.pau.putrautama.gamon.R;
 import com.pau.putrautama.gamon.ui.model.VoucherListUser;
+import com.pau.putrautama.gamon.ui.poin.PoinActivity;
 
 public class DetailVoucherUserActivity extends AppCompatActivity {
 
     TextView mjudulVoucher,mPoin,mDeskripsi,mTglVoucher,mSyarat1,mSyarat2,mSyarat3,mSyarat4,mSyarat5;
     ImageView mImageVoucher;
-    Button mBtnGunakan,mBtnKembali;
+    Button mBtnGunakan;
     ImageView mBack;
 
     private VoucherListUser voucherList;
+    private DatabaseReference mFirebaseDatabase;
+    private FirebaseDatabase mFirebaseInstance;
+    private FirebaseAuth mAuth;
+    String userId,voucherId;
 
     public static final String ITEM_VOUCHER_USER = "item_voucher_user";
     @Override
@@ -40,7 +55,11 @@ public class DetailVoucherUserActivity extends AppCompatActivity {
         mSyarat5 = findViewById(R.id.syarat5_user);
         mImageVoucher = findViewById(R.id.voucher_image_user);
         mBtnGunakan = findViewById(R.id.btn_gunakan_voucher);
-        mBtnKembali = findViewById(R.id.btn_kembali);
+
+
+        mAuth = FirebaseAuth.getInstance();
+        mFirebaseInstance = FirebaseDatabase.getInstance();
+        mFirebaseDatabase = mFirebaseInstance.getReference("users");
 
         mBack = findViewById(R.id.back_voucher_user);
 
@@ -53,6 +72,7 @@ public class DetailVoucherUserActivity extends AppCompatActivity {
 
         voucherList = (VoucherListUser) getIntent().getSerializableExtra(ITEM_VOUCHER_USER);
         mjudulVoucher.setText(voucherList.getJudulVoucher());
+        Glide.with(this).load(voucherList.getGambarVoucher()).into(mImageVoucher);
         String poin = Integer.toString(voucherList.getPoinVoucher());
         mPoin.setText(poin+"P");
         mDeskripsi.setText(voucherList.getDeskripsi());
@@ -63,12 +83,7 @@ public class DetailVoucherUserActivity extends AppCompatActivity {
         mSyarat4.setText(voucherList.getSyarat4());
         mSyarat5.setText(voucherList.getSyarat5());
 
-        mBtnKembali.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+
 
         mBtnGunakan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,8 +108,11 @@ public class DetailVoucherUserActivity extends AppCompatActivity {
         yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                removeVoucherData();
                 Toast.makeText(DetailVoucherUserActivity.this, "Voucher Telah Digunakan", Toast.LENGTH_SHORT).show();
-                mBtnGunakan.setVisibility(View.GONE);
+                Intent intent = new Intent(DetailVoucherUserActivity.this, PoinActivity.class);
+                startActivity(intent);
+                finish();
                 dialog.dismiss();
             }
         });
@@ -106,5 +124,30 @@ public class DetailVoucherUserActivity extends AppCompatActivity {
             }
         });
         dialog.show();
+    }
+
+    private void removeVoucherData(){
+        userId = mAuth.getUid();
+
+        getkey();
+        Query voucherQuery = mFirebaseDatabase.child(userId).child("voucher").equalTo(voucherId);
+
+        voucherQuery.getRef().removeValue();
+
+    }
+
+    private void getkey() {
+        mFirebaseDatabase.child("voucher").child(voucherList.getJudulVoucher())
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        voucherId = dataSnapshot.getKey();
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
     }
 }

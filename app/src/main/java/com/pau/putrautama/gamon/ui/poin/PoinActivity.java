@@ -53,6 +53,8 @@ public class PoinActivity extends AppCompatActivity {
         mFirebaseInstance = FirebaseDatabase.getInstance();
         mFirebaseDatabase = mFirebaseInstance.getReference("users");
 
+        retriveData();
+
         mBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

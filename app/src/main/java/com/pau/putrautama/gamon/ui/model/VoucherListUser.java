@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class VoucherListUser implements Serializable {
     private String judulVoucher;
-    private int gambarVoucher;
+    private String gambarVoucher;
     private String tglVoucher;
     private int poinVoucher;
     private String deskripsi;
@@ -13,9 +13,11 @@ public class VoucherListUser implements Serializable {
     private String syarat3;
     private String syarat4;
     private String syarat5;
+    private String statusVoucher;
 
-    public VoucherListUser(String judulVoucher, int gambarVoucher, String tglVoucher, int poinVoucher
-            , String deskripsi, String syarat1, String syarat2, String syarat3, String syarat4, String syarat5) {
+    public VoucherListUser(String judulVoucher, String gambarVoucher, String tglVoucher,
+                           int poinVoucher, String deskripsi, String syarat1, String syarat2,
+                           String syarat3, String syarat4, String syarat5, String statusVoucher) {
         this.judulVoucher = judulVoucher;
         this.gambarVoucher = gambarVoucher;
         this.tglVoucher = tglVoucher;
@@ -26,9 +28,18 @@ public class VoucherListUser implements Serializable {
         this.syarat3 = syarat3;
         this.syarat4 = syarat4;
         this.syarat5 = syarat5;
+        this.statusVoucher = statusVoucher;
     }
 
     public VoucherListUser() {
+    }
+
+    public String getStatusVoucher() {
+        return statusVoucher;
+    }
+
+    public void setStatusVoucher(String statusVoucher) {
+        this.statusVoucher = statusVoucher;
     }
 
     public String getTglVoucher() {
@@ -103,11 +114,11 @@ public class VoucherListUser implements Serializable {
         this.judulVoucher = judulVoucher;
     }
 
-    public int getGambarVoucher() {
+    public String getGambarVoucher() {
         return gambarVoucher;
     }
 
-    public void setGambarVoucher(int gambarVoucher) {
+    public void setGambarVoucher(String gambarVoucher) {
         this.gambarVoucher = gambarVoucher;
     }
 }

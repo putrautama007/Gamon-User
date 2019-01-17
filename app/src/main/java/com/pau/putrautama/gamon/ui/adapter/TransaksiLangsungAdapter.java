@@ -29,7 +29,7 @@ public class TransaksiLangsungAdapter extends RecyclerView.Adapter<TransaksiLang
     @NonNull
     @Override
     public TransaksiLangsungAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_history, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_transaksi_langsung, parent, false);
         return new ViewHolder(view);
     }
 

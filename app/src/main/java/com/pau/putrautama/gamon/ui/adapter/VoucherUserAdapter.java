@@ -39,8 +39,6 @@ public class VoucherUserAdapter  extends RecyclerView.Adapter<VoucherUserAdapter
     public void onBindViewHolder(@NonNull VoucherUserAdapter.ViewHolder holder, final int position) {
         Glide.with(context).load(voucherListUsers.get(position).getGambarVoucher()).into(holder.mVoucher);
 
-        holder.mJudulVoucher.setText(voucherListUsers.get(position).getJudulVoucher());
-
         holder.mCVoucher.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -58,11 +56,9 @@ public class VoucherUserAdapter  extends RecyclerView.Adapter<VoucherUserAdapter
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView mVoucher;
-        TextView mJudulVoucher;
         CardView mCVoucher;
         public ViewHolder(View itemView) {
             super(itemView);
-            mJudulVoucher = itemView.findViewById(R.id.judul_voucher_user);
             mVoucher = itemView.findViewById(R.id.image_voucher_user);
             mCVoucher = itemView.findViewById(R.id.cv_voucher_user);
         }

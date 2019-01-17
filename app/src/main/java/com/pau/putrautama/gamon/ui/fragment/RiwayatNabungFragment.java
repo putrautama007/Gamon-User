@@ -7,13 +7,22 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.pau.putrautama.gamon.R;
-import com.pau.putrautama.gamon.ui.adapter.TransaksiLangsungAdapter;
-import com.pau.putrautama.gamon.ui.model.History;
+import com.pau.putrautama.gamon.ui.adapter.TabunganAdapter;
+import com.pau.putrautama.gamon.ui.adapter.TransaksiTabungAdapter;
+import com.pau.putrautama.gamon.ui.model.TransaksiLangsung;
+import com.pau.putrautama.gamon.ui.model.TransaksiTabung;
 
 import java.util.ArrayList;
 
@@ -23,8 +32,12 @@ import java.util.ArrayList;
 public class RiwayatNabungFragment extends Fragment {
 
     private RecyclerView mRVHistory;
-    private ArrayList<History> historyList = new ArrayList<>();
-    private TransaksiLangsungAdapter adapter;
+    private ArrayList<TransaksiTabung> transaksiTabungs = new ArrayList<>();
+    private TransaksiTabungAdapter adapter;
+    private DatabaseReference mFirebaseDatabase;
+    private FirebaseDatabase mFirebaseInstance;
+    private FirebaseAuth mAuth;
+    private String userId,bankId;
 
 
     public RiwayatNabungFragment() {
@@ -43,25 +56,38 @@ public class RiwayatNabungFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        setUpData();
-//        mRVHistory = view.findViewById(R.id.rv_riwayat_nabung);
-//        adapter = new TransaksiLangsungAdapter(getContext(),historyList);
-//        mRVHistory.setLayoutManager(new LinearLayoutManager(getContext()));
-//        mRVHistory.setAdapter(adapter);
-//        adapter.notifyDataSetChanged();
+        mAuth = FirebaseAuth.getInstance();
+        mFirebaseInstance = FirebaseDatabase.getInstance();
+        mFirebaseDatabase = mFirebaseInstance.getReference("users");
+
+
+        loadData();
+        mRVHistory = view.findViewById(R.id.rv_riwayat_nabung);
+        adapter = new TransaksiTabungAdapter(getContext(), transaksiTabungs);
+        mRVHistory.setLayoutManager(new LinearLayoutManager(getContext()));
+        mRVHistory.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
     }
 
-    private void setUpData(){
-        historyList.add(new History("Bank Sampah Sumber Jaya",
-                "Jl. Cempaka 2 No. 16 Malang, Jawa Timur",
-                "21 Oktober 2018 | 14:32",110,"John Doe",
-                4,2,6000,5000,11000));
+    private void loadData(){
+        userId = mAuth.getUid();
+        mFirebaseDatabase.child(userId).child("tabung").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot tiapDataSnapshot:dataSnapshot.getChildren()) {
+                    TransaksiTabung transaksiTabung = tiapDataSnapshot.getValue(TransaksiTabung.class);
+                    transaksiTabungs.add(transaksiTabung);
+                }
+                adapter.notifyDataSetChanged();
 
-        historyList.add(new History("Bank Sampah Sumber Jaya",
-                "Jl. Cempaka 2 No. 16 Malang, Jawa Timur",
-                "19 Oktober 2018 2018 | 10:32"
-               ,80,"John Doe",
-                2,2,3000,
-                2000,8000));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
+
+
 }

@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class VoucherList implements Serializable {
     private String judulVoucher;
-    private int gambarVoucher;
+    private String gambarVoucher;
     private int poinVoucher;
     private String deskripsi;
     private String syarat1;
@@ -13,7 +13,7 @@ public class VoucherList implements Serializable {
     private String syarat4;
     private String syarat5;
 
-    public VoucherList(String judulVoucher, int gambarVoucher, int poinVoucher, String deskripsi,
+    public VoucherList(String judulVoucher, String gambarVoucher, int poinVoucher, String deskripsi,
                        String syarat1, String syarat2, String syarat3, String syarat4, String syarat5) {
         this.judulVoucher = judulVoucher;
         this.gambarVoucher = gambarVoucher;
@@ -93,11 +93,11 @@ public class VoucherList implements Serializable {
         this.judulVoucher = judulVoucher;
     }
 
-    public int getGambarVoucher() {
+    public String getGambarVoucher() {
         return gambarVoucher;
     }
 
-    public void setGambarVoucher(int gambarVoucher) {
+    public void setGambarVoucher(String gambarVoucher) {
         this.gambarVoucher = gambarVoucher;
     }
 }

@@ -20,7 +20,7 @@
             <ImageView
                 android:layout_weight="0.5"
                 android:id="@+id/iv_bank_sampah"
-                android:src="@drawable/fotobanksampah"
+                android:src="@drawable/icon"
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
@@ -38,19 +38,14 @@
 
                 <TextView
                     android:id="@+id/tv_nama_bank_sampah"
-                    android:text="Nama Bank Sampah"
+                    android:text="Bank Sampah Jaya"
                     android:textColor="@android:color/black"
                     android:layout_marginStart="10dp"
+                    android:textSize="15sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
-                <TextView
-                    android:id="@+id/tv_alamat_bank_sampah"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="5dp"
-                    android:text="alamat bank sampah"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+
 
 
             </LinearLayout>

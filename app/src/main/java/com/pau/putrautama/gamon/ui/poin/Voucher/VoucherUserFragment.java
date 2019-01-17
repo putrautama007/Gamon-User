@@ -11,6 +11,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.pau.putrautama.gamon.R;
 import com.pau.putrautama.gamon.ui.adapter.VoucherAdapter;
 import com.pau.putrautama.gamon.ui.adapter.VoucherUserAdapter;
@@ -28,6 +34,11 @@ public class VoucherUserFragment extends Fragment {
     private ArrayList<VoucherListUser> voucherListUsers = new ArrayList<>();
     private VoucherUserAdapter adapter;
 
+    private DatabaseReference mFirebaseDatabase;
+    private FirebaseDatabase mFirebaseInstance;
+    private FirebaseAuth mAuth;
+    String userId;
+
     public VoucherUserFragment() {
         // Required empty public constructor
     }
@@ -44,27 +55,36 @@ public class VoucherUserFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        setUpData();
+
+        mAuth = FirebaseAuth.getInstance();
+        mFirebaseInstance = FirebaseDatabase.getInstance();
+        mFirebaseDatabase = mFirebaseInstance.getReference("users");
+
+        loadDataVoucher();
         mRVVoucer = view.findViewById(R.id.rv_voucher_user);
         adapter = new VoucherUserAdapter(getContext(),voucherListUsers);
         mRVVoucer.setLayoutManager(new LinearLayoutManager(getContext()));
         mRVVoucer.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }
-    private void setUpData(){
 
-        int [] fotoVoucher = new int[]{
-                R.drawable.iw,
-                R.drawable.alfimart,
-                R.drawable.alfimartt
-        };
+    private void loadDataVoucher(){
+        userId = mAuth.getUid();
+        mFirebaseDatabase.child(userId).child("voucher").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot tiapDataSnapshot:dataSnapshot.getChildren()) {
+                    VoucherListUser voucherList = tiapDataSnapshot.getValue(VoucherListUser.class);
+                    voucherListUsers.add(voucherList);
+                }
+                adapter.notifyDataSetChanged();
 
-                voucherListUsers.add(new VoucherListUser("Voucher Infinity War",
-                fotoVoucher[0],"19 Oktober 2018",
-                400 ,"Gratis 1 tiket film Infinity War berlaku setiap hari Senin - Jumat !"
-                ,"Voucher yang telah dibeli hanya berlaku hingga 30 hari",
-                "Voucher hanya berlaku di seluruh Bioskop Kota Malang",
-                "Tombol ‘Gunakan Voucher’ hanya digunakan untuk petugas",
-                "Tukar voucher pada petugas bioskop","Transaksi selesai !"));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 }

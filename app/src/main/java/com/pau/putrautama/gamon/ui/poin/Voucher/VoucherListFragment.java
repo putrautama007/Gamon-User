@@ -11,6 +11,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.pau.putrautama.gamon.R;
 import com.pau.putrautama.gamon.ui.adapter.VoucherAdapter;
 import com.pau.putrautama.gamon.ui.model.VoucherList;
@@ -25,6 +30,8 @@ public class VoucherListFragment extends Fragment {
     private RecyclerView mRVVoucer;
     private ArrayList<VoucherList> voucherLists = new ArrayList<>();
     private VoucherAdapter adapter;
+    private DatabaseReference mFirebaseDatabase;
+    private FirebaseDatabase mFirebaseInstance;
 
 
     public VoucherListFragment() {
@@ -43,7 +50,11 @@ public class VoucherListFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        setUpData();
+        mFirebaseInstance = FirebaseDatabase.getInstance();
+        mFirebaseDatabase = mFirebaseInstance.getReference("poin");
+
+
+        loadDataPoin();
         mRVVoucer = view.findViewById(R.id.rv_voucher_list);
         adapter = new VoucherAdapter(getContext(),voucherLists);
         mRVVoucer.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -51,23 +62,22 @@ public class VoucherListFragment extends Fragment {
         adapter.notifyDataSetChanged();
     }
 
-    private void setUpData(){
-        int [] fotoVoucher = new int[]{
-                R.drawable.iw,
-                R.drawable.alfimart,
-                R.drawable.alfimartt
-        };
-        voucherLists.add(new VoucherList("Voucher Infinity War",
-                fotoVoucher[0],400 ,"Gratis 1 tiket film Infinity War berlaku setiap hari Senin - Jumat !"
-                ,"Voucher yang telah dibeli hanya berlaku hingga 30 hari",
-                "Voucher hanya berlaku di seluruh Bioskop Kota Malang",
-                "Tombol ‘Gunakan Voucher’ hanya digunakan untuk petugas",
-                "Tukar voucher pada petugas bioskop","Transaksi selesai !"));
-        voucherLists.add(new VoucherList("Voucher Infinity War",
-                fotoVoucher[1],1500 ,"Gratis 1 voucher belanaj Rp. 100.000 di Alfmart berlaku setiap hari Senin - Jumat !"
-                ,"Voucher yang telah dibeli hanya berlaku hingga 30 hari",
-                "Voucher hanya berlaku di seluruh Alfmart Kota Malang",
-                "Tombol ‘Gunakan Voucher’ hanya digunakan untuk petugas",
-                "Tukar voucher pada petugas Alfamart","Transaksi selesai !"));
+    private void loadDataPoin(){
+        mFirebaseDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot tiapDataSnapshot:dataSnapshot.getChildren()) {
+                    VoucherList voucherList = tiapDataSnapshot.getValue(VoucherList.class);
+                    voucherLists.add(voucherList);
+                }
+                adapter.notifyDataSetChanged();
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 }

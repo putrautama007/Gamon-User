@@ -63,6 +63,9 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/voucher_image_user"
                     android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="168dp"
+                    android:layout_toStartOf="@+id/poin_voucher_user"
                     android:fontFamily="sans-serif"
                     android:lineSpacingExtra="2sp"
                     android:text="Voucher Infinity War"
@@ -275,6 +278,7 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginStart="70dp"
                     android:layout_marginEnd="70dp"
+                    android:layout_marginBottom="20dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/button_with_border_red"
@@ -287,23 +291,6 @@
                     android:gravity="center"
                     android:text="@string/gunakan_voucher" />
 
-                <Button
-                    android:id="@+id/btn_kembali"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginStart="70dp"
-                    android:layout_marginEnd="70dp"
-                    android:layout_marginBottom="20dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/button_with_border"
-                    android:layout_centerHorizontal="true"
-                    android:layout_below="@+id/btn_gunakan_voucher"
-                    android:fontFamily="sans-serif"
-                    android:textStyle="normal"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="15sp"
-                    android:gravity="center"
-                    android:text="@string/kembali" />
             </RelativeLayout>
 
 

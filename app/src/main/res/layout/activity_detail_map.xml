@@ -55,7 +55,8 @@
                 android:layout_marginEnd="10dp"
                 android:layout_marginTop="20dp"
                 android:scaleType="fitXY"
-                android:src="@drawable/fotobanksampah"
+                android:src="@drawable/icon"
+
                 />
             <TextView
                 android:id="@+id/ntv_nama_bank"

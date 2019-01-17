@@ -11,9 +11,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.pau.putrautama.gamon.R;
 import com.pau.putrautama.gamon.ui.adapter.BankAdapter;
 import com.pau.putrautama.gamon.ui.model.BankList;
+import com.pau.putrautama.gamon.ui.model.TransaksiTabung;
 
 import java.util.ArrayList;
 
@@ -25,7 +32,10 @@ public class BankFragment extends Fragment {
     private RecyclerView mRVBank;
     private ArrayList<BankList> bankLists = new ArrayList<>();
     private BankAdapter adapter;
-
+    private DatabaseReference mFirebaseDatabase;
+    private FirebaseDatabase mFirebaseInstance;
+    private FirebaseAuth mAuth;
+    private String userId;
 
     public BankFragment() {
         // Required empty public constructor
@@ -43,6 +53,10 @@ public class BankFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        mAuth = FirebaseAuth.getInstance();
+        mFirebaseInstance = FirebaseDatabase.getInstance();
+        mFirebaseDatabase = mFirebaseInstance.getReference("users");
+
         setUpData();
         mRVBank = view.findViewById(R.id.rv_bank);
         adapter = new BankAdapter(getContext(),bankLists);
@@ -52,15 +66,24 @@ public class BankFragment extends Fragment {
     }
 
     private void setUpData(){
+        userId = mAuth.getUid();
+        mFirebaseDatabase.child(userId).child("bankSampah").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot tiapDataSnapshot:dataSnapshot.getChildren()) {
+                    BankList bankList = tiapDataSnapshot.getValue(BankList.class);
+                    bankLists.add(bankList);
+                }
+                adapter.notifyDataSetChanged();
 
-//        int [] fotobank = new int[]{
-//                R.drawable.fotobanksampah,
-//
-//        };
-//
-//        bankLists.add(new BankList(fotobank[0],"Bank Sampah Sumber Jaya",
-//                "Jl. Cempaka 2 No. 16 Malang, Jawa Timur",
-//                30000, "21-Oktober-2018"));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
     }
 
 }

@@ -36,21 +36,21 @@ public class BankAdapter extends RecyclerView.Adapter<BankAdapter.BankViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull BankViewHolder holder, final int position) {
-        holder.mNamaBank.setText(bankLists.get(position).getNamaBank());
-        holder.mAlamatBank.setText(bankLists.get(position).getAlamatBank());
+//        holder.mNamaBank.setText(bankLists.get(position).getNamaBank());
+//        holder.mAlamatBank.setText(bankLists.get(position).getAlamatBank());
         String saldo = Integer.toString(bankLists.get(position).getSaldo());
         holder.mSaldo.setText("Rp. "+saldo);
 
-        holder.mCVBank.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, BankDetailActivity.class);
-                intent.putExtra("nama_bank",bankLists.get(position).getNamaBank());
-                intent.putExtra("alamat_bank",bankLists.get(position).getAlamatBank());
-                intent.putExtra("tgl_masuk_bank",bankLists.get(position).getTglMasuk());
-                context.startActivity(intent);
-            }
-        });
+//        holder.mCVBank.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(context, BankDetailActivity.class);
+//                intent.putExtra("nama_bank",bankLists.get(position).getNamaBank());
+//                intent.putExtra("alamat_bank",bankLists.get(position).getAlamatBank());
+//                intent.putExtra("tgl_masuk_bank",bankLists.get(position).getTglMasuk());
+//                context.startActivity(intent);
+//            }
+//        });
 
     }
 
